@@ -6,10 +6,20 @@ import MovieDetails from './components/MovieDetails'
 import axios from 'axios'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
+import { useDispatch, useSelector } from "react-redux";
+import { actionGetAllMovie } from "./redux/action/movieAction";
 
 function App() {
   const [movies, setMovies] = useState([])
   const [pageCount, setpageCount] = useState(0)
+  
+  const dispatch = useDispatch();
+
+  // const movieS = useSelector(state => state.redMovie.movies);
+
+  // const pageCountS = useSelector(state => state.redMovie.pageCount);
+
+
   //get all movies by axios 
   const getAllMovies = async () => {
     const res = await axios.get("https://api.themoviedb.org/3/movie/popular?api_key=52ef927bbeb21980cd91386a29403c78&language=ar")
@@ -26,6 +36,7 @@ function App() {
 
   useEffect(() => {
     getAllMovies();
+    dispatch(actionGetAllMovie())
   }, [])
 
   //to search in api
