@@ -1,12 +1,13 @@
 
-import {createStore} from 'redux';
+import {createStore ,applyMiddleware} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { rootReducer } from '../reducer/rootReducer';
-// import {AllMOVIES} from './moviesTypes/types'
+import thunk from 'redux-thunk';
 
 
+// export const store = createStore(rootReducer,composeWithDevTools());
+export const store = createStore(rootReducer,applyMiddleware(thunk));
 
-export const store = createStore(rootReducer,composeWithDevTools());
 
 // const [movies, setMovies] = useState([])
 // const [pageCount, setpageCount] = useState(0)

@@ -1,9 +1,15 @@
 import axios from "axios"
-import { AllMOVIES } from "../types/moviesTypes";
-
+import { AllMOVIES,MovieAPI } from "../types/moviesTypes";
 
 export const actionGetAllMovie = () =>{
-    return {type:AllMOVIES , data:[1,2,3,4],pages: 0}
+
+    return async(adispatch) => {// adispatch mot3er or dispatch call it
+        const res = await axios.get(MovieAPI);
+        console.log(res.data);
+        adispatch({type:AllMOVIES, data:res.data.results, pages: res.data.total_pages});
+        
+    }                
+
 }
 
 
