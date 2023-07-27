@@ -1,11 +1,23 @@
-import React from 'react'
+import React,{useEffect, useState} from 'react'
 import { Pagination } from 'react-bootstrap'
 import ReactPaginate from 'react-paginate';
+import axios from 'axios';
+import { useSelector,useDispatch } from 'react-redux';
+import { actionGetPage } from '../redux/action/movieAction';
+const PaginationComponent = () => {   // del {}
+    const [pageCount, setpageCount] = useState(0);
+    const dispatch = useDispatch();
+    const pages = useSelector(state => state.redMovie.pageCount);
 
-const PaginationComponent = ({ getPage ,pageCount}) => {
+    useEffect(()=>{
+        setpageCount(pages);
+    })
+  
+    const getPageMovie = async (page) =>{
+        dispatch(actionGetPage(page));
+    }
     const handlePageClick = (data) => {
-        console.log(data.selected + 1)
-        getPage(data.selected + 1)
+        getPageMovie(data.selected + 1)
     }
     return (
         <ReactPaginate
