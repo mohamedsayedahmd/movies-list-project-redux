@@ -4,7 +4,7 @@ import CardMovie from "./CardMovie";
 import PaginationComponent from './Pagination'
 import { useSelector,useDispatch } from "react-redux";
 import { actionGetAllMovie } from "../redux/action/movieAction";
-const MoviesList = ({getPage, pageCount }) => {
+const MoviesList = () => {
 
   const [movies, setMovies] = useState([])
   const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const MoviesList = ({getPage, pageCount }) => {
         return (<CardMovie key={mov.id} mov={mov} />)
       })) : <h2 className="text-center p-5">لا يوجد افلام...</h2>}
 
-      {movies.length >= 1 ? (<PaginationComponent getPage={getPage} pageCount={pageCount} />) : null}
+      {movies.length >= 1 ? (<PaginationComponent />) : null}
 
     </Row>
   );
